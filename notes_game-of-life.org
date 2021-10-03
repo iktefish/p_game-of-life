@@ -19,6 +19,7 @@
    | x0y0 | ' '   |
 
 4) draw_grid()
+5) draw_from_hash()
 
 ** update_coordinate("coordinate_val, counter") -> ()
 
@@ -60,3 +61,12 @@
 ** new_cordinate() -> &str
 
 1) return ~char x~ + int x.to_string() + ~char y~ + int y.to_string()
+
+** draw_from_hash()
+
+1) iterate through hashmap -> +arcane method of iteration+ -> iterate using coordinate of y
+2) get x coordinate
+3) print till x coordinate hits n - 1
+4) create new line
+5) go to step 3
+6) stop where key is x(n-1)y(n-1)
