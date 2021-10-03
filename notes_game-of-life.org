@@ -10,29 +10,53 @@
 ** Start ...
 
 1) user inputs ~n~
-   ~n~ is the size of the grid -> ~n x n~
-2) coordinate_name = "x0y0"
-3) draw_grid()
-4) Adds coordinate and key/value to hashmap
-   ~key: "x0y0" | value: ' '~
-5) Initial hashmap value is
-   x0y0: ' '
+   1) ~n~ is the size of the grid -> ~n x n~
+2) coordinate_val = "x0y0"
+3) initialize a hashmap:
 
-** update_coordinate("coordinate_name, counter") -> &str
+   | Key  | Value |
+   |------+-------|
+   | x0y0 | ' '   |
+
+4) draw_grid()
+
+** update_coordinate("coordinate_val, counter") -> ()
 
 1) extract_coordinates()
-1) return ~updated_coordinate~
+2) we have ~x index~ and ~y index~
+3) if x >= n - 1
+   1) set x to 0
+   2) set y = ++y
+4) else
+   1) x = ++x
+5) pass int x and int y as args to new_cordinate()
+6) coordinate_val = new_cordinate()
+7) push ~coordinate_val~ to hashmap:
 
-** draw_grid("coordinate_name, counter") -> ()
+   | Key  | Value |
+   |------+-------|
+   | x0y0 | ' '   |
+   | x1y0 | ' '   |
 
-1) Loop
-   till counter == n*n
-   1) println" " ~n~ number of times
+** draw_grid("coordinate_val, counter") -> ()
+
+1) counter = 0
+2) loop till counter == n*n
+   1) println" " +~n~ number of times+
    2) update_coordinate()
-   3) move to next line
-2) return
+   3) if extract_coordinate().x == n - 1
+      1) move to next line
+3) return
 
-** extract_coordinated()
+** extract_coordinated(coordinate_val) -> int, int
 
-1) take "x13y19"
-2) return 13, 19
+1) take "x0y0"
+2) find ~x~ char within string and get index
+3) find ~y~ char within string and get index
+4) extract value between ~x index~ and ~y index~
+5) extract value between ~y index~ and ~final index~
+6) return ~x index~ and ~y index~ as int
+
+** new_cordinate() -> &str
+
+1) return ~char x~ + int x.to_string() + ~char y~ + int y.to_string()
