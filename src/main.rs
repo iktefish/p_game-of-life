@@ -42,12 +42,20 @@ fn checkinput() -> bool{
     // let sliced_str: &str = test_var.as_str();       // i cut Strin into str
     // let sliced_str: &str = "123";       // if i put a str "123" then true
 
-    println!("sliced_str ---> {}\nmy_own_string ---> {}", sliced_str, my_own_str); // print to check input val
+    println!("sliced_str ---> {}", sliced_str); // print to check input val
+    println!("my_own_string ---> {}", my_own_str); // print to check input val
     let test = sliced_str.chars().all(char::is_numeric); // check if my str is a numeric
 
+    println!("---------------------------------------");
+    println!("Type of my_own_str");
     find_type(&my_own_str);
+    println!("---------------------------------------");
+    println!("Type of sliced_str");
     find_type(&sliced_str);
+    println!("---------------------------------------");
+    println!("Type of sliced_str_new");
     find_type(&sliced_str_new);
+    println!("---------------------------------------");
 
     println!("TEST ---> {}", test); // print bool
 
