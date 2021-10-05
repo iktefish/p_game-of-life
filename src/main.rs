@@ -5,11 +5,22 @@ use std::io;                    // to take user input
 fn main() {
 //let mut grid_size = get_input().trim().parse::<i64>().unwrap();
 //println!("{}", grid_size + 2 );
-println!("From main ---> {:?}",checkinput());
 
+    // let ret_tup = check_input();
+
+    loop {
+
+        let ret_tup = check_input();
+
+        if ret_tup.0 == true {
+            println!("From main ---> {:?}, {:?}", ret_tup.0, ret_tup.1);
+            break;
+        }
+
+    }
  }
 
-fn get_input() -> String{
+fn get_input() -> String {
 // fn get_input() -> &'static str{
     println!("Please enter the grid size" );
 
@@ -28,7 +39,8 @@ fn get_input() -> String{
     // return my_test_str;
 }
 
-fn checkinput() -> bool{
+// fn check_input() -> (bool, &'static str) {
+fn check_input() -> (bool, String) {
     // match get_input().bytes().all(|c| c.is_ascii_digit()) {
 
     // let  test = get_input().bytes().all(|c| c.is_ascii_digit());
@@ -67,8 +79,8 @@ fn checkinput() -> bool{
     println!("TEST ---> {}", test); // print bool
 
     match test {
-        true => return true,
-        false => return false,
+        true => return (true, test_var.trim().to_string()),
+        false => return (false, "Please enter a proper number!".trim().to_string()),
     }
 }
 
