@@ -3,10 +3,9 @@ use std::collections::HashMap;
 use std::str;
 
 fn main() {
-     let coordinate_val: &str = "x1234y12";
+     let coordinate_val: &str = "x12334y562278";
      extract_coordinate(coordinate_val);
  }
-
 
 fn extract_coordinate(temp_coordinate: &str ) -> (i32, i32){
 let x_index:usize = temp_coordinate.find('x').unwrap_or(0)  ;
@@ -16,9 +15,12 @@ let x_extracted_value_pointer = &mut x_extracted_value;
 let mut y_extracted_value = String::new();
 let y_extracted_value_pointer = &mut y_extracted_value;
 let mut indexdifference_xy:usize = (y_index-1) - x_index;
+let mut endindex:usize = temp_coordinate.chars().count();
+let mut indexdifference_y_end:usize = endindex - (y_index+1);
 let mut loopcounter_x:usize = 0;
 let loopcounter_x_pointer = &mut loopcounter_x;
-
+let mut loopcounter_y:usize = 0;
+let loopcounter_y_pointer = &mut loopcounter_y;
 
  //LOOP FOR X
  let outputx = loop {
@@ -36,16 +38,29 @@ let loopcounter_x_pointer = &mut loopcounter_x;
      if &mut *loopcounter_x_pointer >= & mut indexdifference_xy{
          break convert_string_toi32(x_finalstring.to_string());
      }
-
 };
 
+//LOOP FOR Y
+ let outputy = loop {
+     println!("Loop counter is {:?}", & mut *loopcounter_y_pointer);
+     let coordinate_add_y = temp_coordinate.chars().nth(y_index+1+ *loopcounter_y_pointer).unwrap() ;
+     println!("{:?}", coordinate_add_y );
+     let y_finalstring = &mut *y_extracted_value_pointer;
+     y_finalstring.push(coordinate_add_y);
+     println!("PINTED FINAL STRING {:?}", y_finalstring);
+     println!("PRINTED FINAL STRING AFTER CONVERSION{:?}", convert_string_toi32(y_finalstring.to_string()) );
+     *loopcounter_y_pointer =  *loopcounter_y_pointer + 1;
 
-println!("OUTPUTTED VALUE FROM LOOP IS{:?}", outputx );
+     if &mut *loopcounter_y_pointer >= & mut indexdifference_y_end{
+         break convert_string_toi32(y_finalstring.to_string());
+     }
+};
 
+println!("OUTPUTTED X VALUE FROM LOOP IS{:?}", outputx );
+println!("OUTPUTTED Y VALUE FROM LOOP IS{:?}", outputy);
 
-return (outputx,2);
+return (outputx,outputy);
 }
-
 
 
 fn convert_string_toi32 (to_be_converted:String ) -> i32 {
