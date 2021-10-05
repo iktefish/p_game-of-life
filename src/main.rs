@@ -44,7 +44,14 @@ fn checkinput() -> bool{
 
     println!("sliced_str ---> {}", sliced_str); // print to check input val
     println!("my_own_string ---> {}", my_own_str); // print to check input val
-    let test = sliced_str.chars().all(char::is_numeric); // check if my str is a numeric
+    // let test = sliced_str.trim().chars().all(char::is_numeric); // check if my str is a numeric
+
+
+    // NOTE: FIXED - when user puts input Rust takes the input and a linebreak ("123\n")
+    // We just need to remove the linebreak and everything will work
+    // This way the slice is also not needed, and STAY AWAY FROM SLICING STRINGS
+    // Strings in Rust are UTF-8 encoded and slicing may mess it up
+    let test = test_var.trim().chars().all(char::is_numeric); // check if my str is a numeric
 
     println!("---------------------------------------");
     println!("Type of my_own_str");
