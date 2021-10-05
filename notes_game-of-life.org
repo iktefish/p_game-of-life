@@ -21,7 +21,7 @@
 4) draw_grid()
 5) draw_from_hash()
 
-** update_coordinate("coordinate_val, counter") -> ()
+** update_coordinate(coordinate_val, n) -> ()
 
 1) extract_coordinates()
 2) we have ~x index~ and ~y index~
@@ -39,14 +39,14 @@
    | x0y0 | ' '   |
    | x1y0 | ' '   |
 
-** draw_grid("coordinate_val, counter") -> ()
+** draw_grid(coordinate_val, n) -> ()
 
 1) counter = 0
 2) loop till counter == n*n
-   1) println" " +~n~ number of times+
-   2) update_coordinate()
-   3) if extract_coordinate().x == n - 1
+   1) if extract_coordinate().x == n - 1
       1) move to next line
+   2) println" " +~n~ number of times+
+   3) update_coordinate()
 3) return
 
 ** extract_coordinated(coordinate_val) -> int, int
