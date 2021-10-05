@@ -1,89 +1,56 @@
-// use std::collections::HashMap;  // to use hashmap
-// // use std::io;                    // to take user input
-use std::io;                    // to take user input
+use std::io;
+use std::collections::HashMap;
 
 fn main() {
-//let mut grid_size = get_input().trim().parse::<i64>().unwrap();
-//println!("{}", grid_size + 2 );
+    let coordinate_val: &str = "x0y0";
+    // initialize hashmap
+    let mut data_map: HashMap<&str, char> = HashMap::new();
 
-    // let ret_tup = check_input();
+    // data_map.insert(
+    //     "hello",
+    //     '1'
+    // );
+    // println!("HashMap value {}", data_map["hello"]);
 
     loop {
+        let ret_check: (bool, String) = check_input();
 
-        let ret_tup = check_input();
+        if ret_check.0 == true {
+            // DEBUG
+            // println!("From main ---> {:?}, {:?}", ret_check.0, ret_check.1);
 
-        if ret_tup.0 == true {
-            println!("From main ---> {:?}, {:?}", ret_tup.0, ret_tup.1);
+            println!("Grid dimensions set to {} x {}", ret_check.1, ret_check.1);
             break;
         }
-
     }
  }
 
 fn get_input() -> String {
-// fn get_input() -> &'static str{
     println!("Please enter the grid size" );
 
-    let mut input_string = String::new();
+    let mut input_string: String = String::new();
     std::io::stdin().read_line(&mut input_string).expect("Failed");
     return input_string;
-
-    // let my_own_str: String = input_string.to_owned();
-    // let sliced_str: &str = &my_own_str[..];
-
-    // println!("sliced_str ---> {}\nmy_own_string ---> {}", sliced_str, my_own_str);
-
-    // return sliced_str;
-
-    // let my_test_str: &str = "2";
-    // return my_test_str;
 }
 
-// fn check_input() -> (bool, &'static str) {
 fn check_input() -> (bool, String) {
-    // match get_input().bytes().all(|c| c.is_ascii_digit()) {
+    let user_input: String = get_input(); // i get a String
 
-    // let  test = get_input().bytes().all(|c| c.is_ascii_digit());
-    // let test = get_input().chars().all(char::is_numeric);
+    let check_bool: bool = user_input.trim().chars().all(char::is_numeric); // check if my str is a numeric
 
-    let test_var = get_input(); // i get a String
+    // // DEBUG
+    // println!("Is user_input only numerals ---> {}", check_bool); // print bool
 
-    let my_own_str: String = test_var.to_owned(); // i own the Strin
-    let sliced_str: &str = &my_own_str[..];       // i cut Strin into str
-    let sliced_str_new: &str = "123312";       // i cut Strin into str
-    // let sliced_str: &str = test_var.as_str();       // i cut Strin into str
-    // let sliced_str: &str = "123";       // if i put a str "123" then true
-
-    println!("sliced_str ---> {}", sliced_str); // print to check input val
-    println!("my_own_string ---> {}", my_own_str); // print to check input val
-    // let test = sliced_str.trim().chars().all(char::is_numeric); // check if my str is a numeric
-
-
-    // NOTE: FIXED - when user puts input Rust takes the input and a linebreak ("123\n")
-    // We just need to remove the linebreak and everything will work
-    // This way the slice is also not needed, and STAY AWAY FROM SLICING STRINGS
-    // Strings in Rust are UTF-8 encoded and slicing may mess it up
-    let test = test_var.trim().chars().all(char::is_numeric); // check if my str is a numeric
-
-    println!("---------------------------------------");
-    println!("Type of my_own_str");
-    find_type(&my_own_str);
-    println!("---------------------------------------");
-    println!("Type of sliced_str");
-    find_type(&sliced_str);
-    println!("---------------------------------------");
-    println!("Type of sliced_str_new");
-    find_type(&sliced_str_new);
-    println!("---------------------------------------");
-
-    println!("TEST ---> {}", test); // print bool
-
-    match test {
-        true => return (true, test_var.trim().to_string()),
+    match check_bool {
+        true => return (true, user_input.trim().to_string()),
         false => return (false, "Please enter a proper number!".trim().to_string()),
     }
 }
 
-fn find_type<T>(_: &T) {
-    println!("{}", std::any::type_name::<T>())
-}
+// -----------------------------------
+// This function is used to find types
+// Use when needed
+// -----------------------------------
+// fn find_type<T>(_: &T) {
+//     println!("{}", std::any::type_name::<T>())
+// }
