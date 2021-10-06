@@ -21,18 +21,18 @@
 4) [ ] draw_grid()
 5) [ ] draw_from_hash()
 
-** TODO update_coordinate("coordinate_val, counter") -> ()
+** DONE update_coordinate("coordinate_val, counter") -> ()
 
-1) [-] extract_coordinates()
-2) [ ] we have ~x index~ and ~y index~
-3) [ ] if x >= n - 1
-   1) [ ] set x to 0
-   2) [ ] set y = ++y
-4) [ ] else
-   1) [ ] x = ++x
-5) [ ] pass int x and int y as args to new_cordinate()
-6) [ ] coordinate_val = new_cordinate()
-7) [ ] push ~coordinate_val~ to hashmap:
+1) [X] extract_coordinates()
+2) [X] we have ~x index~ and ~y index~
+3) [X] if x >= n - 1
+   1) [X] set x to 0
+   2) [X] set y = ++y
+4) [X] else
+   1) [X] x = ++x
+5) [X] pass int x and int y as args to new_cordinate()
+6) [X] coordinate_val = new_cordinate()
+7) [X] push ~coordinate_val~ to hashmap:
 
    | Key  | Value |
    |------+-------|
@@ -49,18 +49,18 @@
       1) [ ] move to next line
 3) [ ] return
 
-** TODO extract_coordinated(coordinate_val) -> int, int
+** DONE extract_coordinated(coordinate_val) -> int, int
 
-1) [-] take "x0y0"
-2) [ ] find ~x~ char within string and get index
-3) [ ] find ~y~ char within string and get index
-4) [ ] extract value between ~x index~ and ~y index~
-5) [ ] extract value between ~y index~ and ~final index~
-6) [ ] return ~x index~ and ~y index~ as int
+1) [X] take "x0y0"
+2) [X] find ~x~ char within string and get index
+3) [X] find ~y~ char within string and get index
+4) [X] extract value between ~x index~ and ~y index~
+5) [X] extract value between ~y index~ and ~final index~
+6) [X] return ~x index~ and ~y index~ as int
 
-** TODO new_cordinate() -> &str
+** DONE new_cordinate() -> &str
 
-1) [ ] return ~char x~ + int x.to_string() + ~char y~ + int y.to_string()
+1) [X] return ~char x~ + int x.to_string() + ~char y~ + int y.to_string()
 
 ** TODO draw_from_hash()
 
