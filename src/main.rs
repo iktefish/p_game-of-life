@@ -8,6 +8,8 @@ fn main() {
     // initialize hashmap
     let mut data_map: HashMap<&str, char> = HashMap::new();
 
+    // NOTE: This is the ~push()~ function
+    // To append data into HashMap
     // data_map.insert(
     //     "hello",
     //     '1'
