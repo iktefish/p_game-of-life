@@ -7,69 +7,69 @@
 + Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction
 
 * Pseudocode
-** Start ...
+** TODO Start ...
 
-1) user inputs ~n~
-   1) ~n~ is the size of the grid -> ~n x n~
-2) coordinate_val = "x0y0"
-3) initialize a hashmap:
+1) [X] user inputs ~n~
+   1) [X] ~n~ is the size of the grid -> ~n x n~
+2) [X] coordinate_val = "x0y0"
+3) [X] initialize a hashmap:
 
    | Key  | Value |
    |------+-------|
    | x0y0 | ' '   |
 
-4) draw_grid()
-5) draw_from_hash()
+4) [ ] draw_grid()
+5) [ ] draw_from_hash()
 
-** update_coordinate(coordinate_val, n) -> ()
+** DONE update_coordinate("coordinate_val, counter") -> ()
 
-1) extract_coordinates()
-2) we have ~x index~ and ~y index~
-3) if x >= n - 1
-   1) set x to 0
-   2) set y = ++y
-4) else
-   1) x = ++x
-5) pass int x and int y as args to new_cordinate()
-6) coordinate_val = new_cordinate()
-7) push ~coordinate_val~ to hashmap:
+1) [X] extract_coordinates()
+2) [X] we have ~x index~ and ~y index~
+3) [X] if x >= n - 1
+   1) [X] set x to 0
+   2) [X] set y = ++y
+4) [X] else
+   1) [X] x = ++x
+5) [X] pass int x and int y as args to new_cordinate()
+6) [X] coordinate_val = new_cordinate()
+7) [X] push ~coordinate_val~ to hashmap:
 
    | Key  | Value |
    |------+-------|
    | x0y0 | ' '   |
    | x1y0 | ' '   |
 
-** draw_grid(coordinate_val, n) -> ()
+** TODO draw_grid("coordinate_val, counter") -> ()
 
-1) counter = 0
-2) loop till counter == n*n
-   1) if extract_coordinate().x == n - 1
-      1) move to next line
-   2) println" " +~n~ number of times+
-   3) update_coordinate()
-3) return
+1) [ ] counter = 0
+2) [ ] loop till counter == n*n
+   1) [ ] println" " +~n~ number of times+
+   2) [ ] update_coordinate()
+   3) [ ] if extract_coordinate().x == n - 1
+      1) [ ] move to next line
+3) [ ] return
 
-** extract_coordinated(coordinate_val) -> int, int
+** DONE extract_coordinated(coordinate_val) -> int, int
 
-1) take "x0y0"
-2) find ~x~ char within string and get index
-3) find ~y~ char within string and get index
-4) extract value between ~x index~ and ~y index~
-5) extract value between ~y index~ and ~final index~
-6) return ~x index~ and ~y index~ as int
+1) [X] take "x0y0"
+2) [X] find ~x~ char within string and get index
+3) [X] find ~y~ char within string and get index
+4) [X] extract value between ~x index~ and ~y index~
+5) [X] extract value between ~y index~ and ~final index~
+6) [X] return ~x index~ and ~y index~ as int
 
-** new_cordinate() -> &str
+** DONE new_cordinate() -> &str
 
-1) return ~char x~ + int x.to_string() + ~char y~ + int y.to_string()
+1) [X] return ~char x~ + int x.to_string() + ~char y~ + int y.to_string()
 
-** draw_from_hash()
+** TODO draw_from_hash()
 
-1) iterate through hashmap -> +arcane method of iteration+ -> iterate using coordinate of y
-2) get x coordinate
-3) print till x coordinate hits n - 1
-4) create new line
-5) go to step 3
-6) stop where key is x(n-1)y(n-1)
+1) [ ] iterate through hashmap -> +arcane method of iteration+ -> iterate using coordinate of y
+2) [ ] get x coordinate
+3) [ ] print till x coordinate hits n - 1
+4) [ ] create new line
+5) [ ] go to step 3
+6) [ ] stop where key is x(n-1)y(n-1)
 
 * Things to note
 ** get_input() and check_input()
