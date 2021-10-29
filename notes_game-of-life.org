@@ -1,80 +1,77 @@
 #+TITLE: notes_Game of Life
+* Contents :TOC_3:noexport:
+- [[#rules][Rules]]
+- [[#arch][Arch]]
+- [[#things-to-note][Things to note]]
+  - [[#get_input-and-check_input][get_input() and check_input()]]
+
 * Rules
-
-+ Any live cell with fewer than two live neighbours dies, as if by underpopulation.
-+ Any live cell with two or three live neighbours lives on to the next generation.
-+ Any live cell with more than three live neighbours dies, as if by overpopulation.
++ Any live cell with fewer than two live neighbours dies, as if by underpopulation
++ Any live cell with two or three live neighbours lives on to the next generation
++ Any live cell with more than three live neighbours dies, as if by overpopulation
 + Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction
+* Arch
+1) [-] Start
+   1) [X] user inputs ~n~
+      1) [X] ~n~ is the size of the grid -> ~n x n~
+   2) [X] coordinate_val = "x0y0"
+   3) [X] initialize a hashmap:
 
-* Pseudocode
-** TODO Start ...
+      | Key  | Value |
+      |------+-------|
+      | x0y0 | ' '   |
 
-1) [X] user inputs ~n~
-   1) [X] ~n~ is the size of the grid -> ~n x n~
-2) [X] coordinate_val = "x0y0"
-3) [X] initialize a hashmap:
+   4) [ ] draw_grid()
+   5) [ ] draw_from_hash()
 
-   | Key  | Value |
-   |------+-------|
-   | x0y0 | ' '   |
+2) [X] update_coordinate("coordinate_val, counter") -> ()
+   1) [X] extract_coordinates()
+   2) [X] we have ~x index~ and ~y index~
+   3) [X] if x >= n - 1
+      1) [X] set x to 0
+      2) [X] set y = ++y
+   4) [X] else
+      1) [X] x = ++x
+   5) [X] pass int x and int y as args to new_cordinate()
+   6) [X] coordinate_val = new_cordinate()
+   7) [X] push ~coordinate_val~ to hashmap:
 
-4) [ ] draw_grid()
-5) [ ] draw_from_hash()
+      | Key  | Value |
+      |------+-------|
+      | x0y0 | ' '   |
+      | x1y0 | ' '   |
 
-** DONE update_coordinate("coordinate_val, counter") -> ()
+3) [ ] draw_grid("coordinate_val, counter") -> ()
+   1) [ ] counter = 0
+   2) [ ] loop till counter == n*n
+      1) [ ] println" " +~n~ number of times+
+      2) [ ] update_coordinate()
+      3) [ ] if extract_coordinate().x == n - 1
+         1) [ ] move to next line
+   3) [ ] return
 
-1) [X] extract_coordinates()
-2) [X] we have ~x index~ and ~y index~
-3) [X] if x >= n - 1
-   1) [X] set x to 0
-   2) [X] set y = ++y
-4) [X] else
-   1) [X] x = ++x
-5) [X] pass int x and int y as args to new_cordinate()
-6) [X] coordinate_val = new_cordinate()
-7) [X] push ~coordinate_val~ to hashmap:
+4) [X] extract_coordinated(coordinate_val) -> int, int
+   1) [X] take "x0y0"
+   2) [X] find ~x~ char within string and get index
+   3) [X] find ~y~ char within string and get index
+   4) [X] extract value between ~x index~ and ~y index~
+   5) [X] extract value between ~y index~ and ~final index~
+   6) [X] return ~x index~ and ~y index~ as int
 
-   | Key  | Value |
-   |------+-------|
-   | x0y0 | ' '   |
-   | x1y0 | ' '   |
+5) [X] new_cordinate() -> &str
+   1) [X] return ~char x~ + int x.to_string() + ~char y~ + int y.to_string()
 
-** TODO draw_grid("coordinate_val, counter") -> ()
-
-1) [ ] counter = 0
-2) [ ] loop till counter == n*n
-   1) [ ] println" " +~n~ number of times+
-   2) [ ] update_coordinate()
-   3) [ ] if extract_coordinate().x == n - 1
-      1) [ ] move to next line
-3) [ ] return
-
-** DONE extract_coordinated(coordinate_val) -> int, int
-
-1) [X] take "x0y0"
-2) [X] find ~x~ char within string and get index
-3) [X] find ~y~ char within string and get index
-4) [X] extract value between ~x index~ and ~y index~
-5) [X] extract value between ~y index~ and ~final index~
-6) [X] return ~x index~ and ~y index~ as int
-
-** DONE new_cordinate() -> &str
-
-1) [X] return ~char x~ + int x.to_string() + ~char y~ + int y.to_string()
-
-** TODO draw_from_hash()
-
-1) [ ] iterate through hashmap -> +arcane method of iteration+ -> iterate using coordinate of y
-2) [ ] get x coordinate
-3) [ ] print till x coordinate hits n - 1
-4) [ ] create new line
-5) [ ] go to step 3
-6) [ ] stop where key is x(n-1)y(n-1)
-
+6) [ ] draw_from_hash()
+   1) [ ] iterate through hashmap -> +arcane method of iteration+ -> iterate using coordinate of y
+   2) [ ] get x coordinate
+   3) [ ] print till x coordinate hits n - 1
+   4) [ ] create new line
+   5) [ ] go to step 3
+   6) [ ] stop where key is x(n-1)y(n-1)
 * Things to note
 ** get_input() and check_input()
 
-#+begin_src rust :exports both :noeval
+#+begin_src rust :noeval
 // use std::collections::HashMap;  // to use hashmap
 // // use std::io;                    // to take user input
 use std::io;                    // to take user input
