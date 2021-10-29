@@ -2,8 +2,7 @@
 * Contents :TOC_3:noexport:
 - [[#rules][Rules]]
 - [[#arch][Arch]]
-- [[#things-to-note][Things to note]]
-  - [[#get_input-and-check_input][get_input() and check_input()]]
+- [[#investigate-get_input-and-check_input][Investigate: get_input() and check_input()]]
 
 * Rules
 + Any live cell with fewer than two live neighbours dies, as if by underpopulation
@@ -68,8 +67,7 @@
    4) [ ] create new line
    5) [ ] go to step 3
    6) [ ] stop where key is x(n-1)y(n-1)
-* Things to note
-** get_input() and check_input()
+* Investigate: get_input() and check_input()
 
 #+begin_src rust :noeval
 // use std::collections::HashMap;  // to use hashmap
