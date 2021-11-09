@@ -1,63 +1,87 @@
 fn main() {
-    sh_gen_grid();
+    let grid: Vec<Vec<char>> = gen_grid();
+    std_out_grid(&grid);
+    find_neighbour(1, 1, &grid);
 }
 
-fn sh_gen_grid() {
-    // const N: usize = 10;
-    //
-    // let xy_arr_0: [char; N] = ['*', '*', '*', '*', '*', '*', '*', '-', '-', '-'];
-    // let xy_arr_1: [char; N] = ['*', '*', '*', '*', '-', '*', '*', '-', '-', '-'];
-    // let xy_arr_2: [char; N] = ['*', '*', '*', '*', '-', '*', '-', '-', '-', '-'];
-    // let xy_arr_3: [char; N] = ['-', '*', '-', '*', '-', '*', '*', '-', '-', '-'];
-    // let xy_arr_4: [char; N] = ['-', '*', '-', '*', '-', '*', '*', '-', '*', '-'];
-    // let xy_arr_5: [char; N] = ['-', '*', '-', '*', '*', '*', '*', '-', '*', '-'];
-    // let xy_arr_6: [char; N] = ['-', '*', '-', '*', '*', '-', '-', '-', '*', '-'];
-    // let xy_arr_7: [char; N] = ['-', '*', '*', '*', '*', '-', '*', '-', '-', '*'];
-    // let xy_arr_8: [char; N] = ['-', '*', '*', '*', '*', '-', '*', '-', '-', '*'];
-    // let xy_arr_9: [char; N] = ['-', '*', '*', '*', '*', '-', '*', '-', '-', '*'];
-    //
-    // let arr: [[char; N]; N] = [
-    //     xy_arr_0, xy_arr_1, xy_arr_2, xy_arr_3, xy_arr_4, xy_arr_5, xy_arr_6, xy_arr_7, xy_arr_8,
-    //     xy_arr_9,
-    // ];
-    //
-    // // for i in arr.iter() {
-    // //     println!("{:?}", i);
-    // // }
-    //
-    // for i in arr.iter() {
-    //     for ii in i.iter() {
-    //         print!("{} ", ii);
-    //     }
-    //     println!();
-    // }
+fn gen_grid() -> Vec<Vec<char>> {
+    let row_0: Vec<char> = vec!['7', '8', '9', '*', '*', '*', '*', '-', '-', '-'];
+    let row_1: Vec<char> = vec!['4', '.', '6', '*', '-', '*', '*', '-', '-', '-'];
+    let row_2: Vec<char> = vec!['1', '2', '3', '*', '-', '*', '-', '-', '-', '-'];
+    let row_3: Vec<char> = vec!['-', '*', '-', '*', '-', '*', '*', '-', '-', '-'];
+    let row_4: Vec<char> = vec!['-', '*', '-', '*', '-', '*', '*', '-', '*', '-'];
+    let row_5: Vec<char> = vec!['-', '*', '-', '*', '*', '*', '*', '-', '*', '-'];
+    let row_6: Vec<char> = vec!['-', '*', '-', '*', '*', '-', '-', '-', '*', '-'];
+    let row_7: Vec<char> = vec!['-', '*', '*', '*', '*', '-', '*', '-', '-', '*'];
+    let row_8: Vec<char> = vec!['-', '*', '*', '*', '*', '-', '*', '-', '-', '*'];
+    let row_9: Vec<char> = vec!['-', '*', '*', '*', '*', '-', '*', '-', '-', '*'];
 
-    const N: usize = 10;
-
-    let xy_arr_0: Vec<char> = vec!['*', '*', '*', '*', '*', '*', '*', '-', '-', '-'];
-    let xy_arr_1: Vec<char> = vec!['*', '*', '*', '*', '-', '*', '*', '-', '-', '-'];
-    let xy_arr_2: Vec<char> = vec!['*', '*', '*', '*', '-', '*', '-', '-', '-', '-'];
-    let xy_arr_3: Vec<char> = vec!['-', '*', '-', '*', '-', '*', '*', '-', '-', '-'];
-    let xy_arr_4: Vec<char> = vec!['-', '*', '-', '*', '-', '*', '*', '-', '*', '-'];
-    let xy_arr_5: Vec<char> = vec!['-', '*', '-', '*', '*', '*', '*', '-', '*', '-'];
-    let xy_arr_6: Vec<char> = vec!['-', '*', '-', '*', '*', '-', '-', '-', '*', '-'];
-    let xy_arr_7: Vec<char> = vec!['-', '*', '*', '*', '*', '-', '*', '-', '-', '*'];
-    let xy_arr_8: Vec<char> = vec!['-', '*', '*', '*', '*', '-', '*', '-', '-', '*'];
-    let xy_arr_9: Vec<char> = vec!['-', '*', '*', '*', '*', '-', '*', '-', '-', '*'];
-
-    let vi_vec: Vec<Vec<char>> = vec![
-        xy_arr_0, xy_arr_1, xy_arr_2, xy_arr_3, xy_arr_4, xy_arr_5, xy_arr_6, xy_arr_7, xy_arr_8,
-        xy_arr_9,
+    let grid: Vec<Vec<char>> = vec![
+        row_0, row_1, row_2, row_3, row_4, row_5, row_6, row_7, row_8, row_9,
     ];
+    return grid;
+}
 
-    // for i in arr.iter() {
-    //     println!("{:?}", i);
-    // }
-
-    for i in vi_vec.iter() {
+fn std_out_grid(grid: &Vec<Vec<char>>) -> () {
+    for i in grid.iter() {
         for ii in i.iter() {
             print!("{} ", ii);
         }
         println!();
     }
+}
+
+fn find_neighbour(x: usize, y: usize, grid: &Vec<Vec<char>>) -> () {
+    let focus_cell = grid[y][x];
+    println!("focus_cell ~~> {}", focus_cell);
+
+    let r_cell = grid[y][x + 1];
+    let l_cell = grid[y][x - 1];
+    let d_cell = grid[y + 1][x];
+    let u_cell = grid[y - 1][x];
+    let rd_cell = grid[y + 1][x + 1];
+    let ru_cell = grid[y - 1][x + 1];
+    let ld_cell = grid[y + 1][x - 1];
+    let lu_cell = grid[y - 1][x - 1];
+
+    println!("r_cell  ~~> {}", r_cell);
+    println!("l_cell  ~~> {}", l_cell);
+    println!("d_cell  ~~> {}", d_cell);
+    println!("u_cell  ~~> {}", u_cell);
+    println!("rd_cell ~~> {}", rd_cell);
+    println!("ru_cell ~~> {}", ru_cell);
+    println!("ld_cell ~~> {}", ld_cell);
+    println!("lu_cell ~~> {}", lu_cell);
+
+    // Our offsets =>
+    // x+1
+    // x-1
+    // y+1
+    // y-1
+    // x+1 y+1
+    // x+1 y-1
+    // x-1 y+1
+    // x-1 y-1
+    //
+    // For edge cases y=0 =>
+    // IGNORE
+    // y-1
+    // x+1 y-1
+    // x-1 y-1
+    // For edge cases y=len-1 =>
+    // IGNORE
+    // y+1
+    // x+1 y+1
+    // x-1 y+1
+    //
+    // For edge cases x=0 =>
+    // IGNORE
+    // x-1
+    // x-1 y+1
+    // x-1 y-1
+    // For edge cases x=len-1 =>
+    // IGNORE
+    // x+1
+    // x+1 y+1
+    // x+1 y-1
 }
