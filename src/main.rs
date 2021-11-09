@@ -2,6 +2,14 @@ fn main() {
     let grid: Vec<Vec<char>> = gen_grid();
     std_out_grid(&grid);
     find_neighbour(1, 1, &grid);
+
+    // create function that checks coordinates and notes which edge case is spawned and returns it
+    // find_neighbour() should return the element inside each neighbouring cell
+    // find_neighbour() checks each neighbouring elem through offsets
+    // find_neighbour() panics at edge cases
+    // Find way to stop edge case panic
+    // We have 6 unique edge cases
+    // Each edge case is dependant on coordinates
 }
 
 fn gen_grid() -> Vec<Vec<char>> {
@@ -84,4 +92,22 @@ fn find_neighbour(x: usize, y: usize, grid: &Vec<Vec<char>>) -> () {
     // x+1
     // x+1 y+1
     // x+1 y-1
+    //
+    // For edge cases x=0 and y=0 =>
+    // IGNORE
+    // y-1
+    // x+1 y-1
+    // x-1 y-1
+    // x-1
+    // x-1 y+1
+    // x-1 y-1
+    //
+    // For edge cases x=len-1 and y=len-1 =>
+    // IGNORE
+    // x-1
+    // x-1 y+1
+    // x-1 y-1
+    // y+1
+    // x+1 y+1
+    // x-1 y+1
 }
