@@ -1,10 +1,16 @@
 fn main() {
     let grid: Vec<Vec<char>> = gen_grid();
+    std_out_grid(&grid);
+
     let x = 1;
     let y = 1;
-    std_out_grid(&grid);
+
     let edge_cat = check_edge(x, y, grid.len());
-    find_neighbour(x, y, &grid, edge_cat);
+
+    let (r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell) =
+        find_neighbour(x, y, &grid, edge_cat);
+
+    println!("r_cell ~~> {}", r_cell);
 }
 
 fn gen_grid() -> Vec<Vec<char>> {
@@ -34,41 +40,96 @@ fn std_out_grid(grid: &Vec<Vec<char>>) -> () {
     }
 }
 
-fn find_neighbour(x: usize, y: usize, grid: &Vec<Vec<char>>, edge_cat: usize) -> () {
+fn find_neighbour(
+    x: usize,
+    y: usize,
+    grid: &Vec<Vec<char>>,
+    edge_cat: usize,
+) -> (char, char, char, char, char, char, char, char) {
     let focus_cell = grid[y][x];
     println!("focus_cell ~~> {}", focus_cell);
 
+    // *** My tuple template ***
+    // (r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell)
+
     if edge_cat == 0 {
         let r_cell = grid[y][x + 1];
+        let l_cell = 'v';
         let d_cell = grid[y + 1][x];
+        let u_cell = 'v';
         let rd_cell = grid[y + 1][x + 1];
+        let ld_cell = 'v';
+        let ru_cell = grid[y + 1][x + 1];
+        let lu_cell = 'v';
+
+        return (
+            r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
+        );
     } else if edge_cat == 1 {
         let r_cell = grid[y][x + 1];
+        let l_cell = 'v';
         let d_cell = grid[y + 1][x];
         let u_cell = grid[y - 1][x];
         let rd_cell = grid[y + 1][x + 1];
+        let ld_cell = 'v';
         let ru_cell = grid[y - 1][x + 1];
+        let lu_cell = 'v';
+
+        return (
+            r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
+        );
     } else if edge_cat == 2 {
         let r_cell = grid[y][x + 1];
         let l_cell = grid[y][x - 1];
         let d_cell = grid[y + 1][x];
+        let u_cell = 'v';
         let rd_cell = grid[y + 1][x + 1];
         let ld_cell = grid[y + 1][x - 1];
+        let ru_cell = 'v';
+        let lu_cell = 'v';
+
+        return (
+            r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
+        );
     } else if edge_cat == 3 {
+        let r_cell = 'v';
         let l_cell = grid[y][x - 1];
+        let d_cell = 'v';
         let u_cell = grid[y - 1][x];
+        let rd_cell = 'v';
+        let ld_cell = 'v';
+        let ru_cell = 'v';
         let lu_cell = grid[y - 1][x - 1];
+
+        return (
+            r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
+        );
     } else if edge_cat == 4 {
+        let r_cell = 'v';
         let l_cell = grid[y][x - 1];
         let d_cell = grid[y + 1][x];
         let u_cell = grid[y - 1][x];
+        let rd_cell = 'v';
         let ld_cell = grid[y + 1][x - 1];
+        let ru_cell = 'v';
         let lu_cell = grid[y - 1][x - 1];
+
+        return (
+            r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
+        );
     } else if edge_cat == 5 {
         let r_cell = grid[y][x + 1];
         let l_cell = grid[y][x - 1];
+        let d_cell = 'v';
+        let u_cell = 'v';
+        let rd_cell = 'v';
+        let ld_cell = 'v';
         let ru_cell = grid[y - 1][x + 1];
         let lu_cell = grid[y - 1][x - 1];
+
+        return (
+            r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
+        );
     } else {
         let r_cell = grid[y][x + 1];
         let l_cell = grid[y][x - 1];
@@ -78,6 +139,10 @@ fn find_neighbour(x: usize, y: usize, grid: &Vec<Vec<char>>, edge_cat: usize) ->
         let ru_cell = grid[y - 1][x + 1];
         let ld_cell = grid[y + 1][x - 1];
         let lu_cell = grid[y - 1][x - 1];
+
+        return (
+            r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
+        );
     }
 }
 
@@ -104,3 +169,7 @@ fn check_edge(x: usize, y: usize, len: usize) -> usize {
     }
 }
 
+// *** TODAY ***
+// check_life()
+// apply_rules()
+//
