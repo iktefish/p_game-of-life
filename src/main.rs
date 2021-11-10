@@ -4,11 +4,13 @@ fn main() {
 
     let x = 1;
     let y = 1;
+    let focus_cell: char = grid[y][x];
 
     let edge_cat = check_edge(x, y, grid.len());
 
     let (r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell) =
         find_neighbour(x, y, &grid, edge_cat);
+    let life_status: i8 = 0;
 
     println!("r_cell ~~> {}", r_cell);
 }
@@ -171,5 +173,12 @@ fn check_edge(x: usize, y: usize, len: usize) -> usize {
 
 // *** TODAY ***
 // check_life()
-// apply_rules()
-//
+// check_fate()
+    // Takes (&focus_cell, find_neighbour(return: char), check_life())
+        // * Rules
+        //  + Any live cell with fewer than two live neighbours dies, as if by underpopulation
+        //  + Any live cell with two or three live neighbours lives on to the next generation
+        //  + Any live cell with more than three live neighbours dies, as if by overpopulation
+        //  + Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction
+    // iterate through check_life((..)) { return i_sum value }
+    // if i_sum < 2 ~~> SET grid[y][x] = 
