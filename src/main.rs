@@ -4,11 +4,14 @@ fn main() {
 
     let x = 1;
     let y = 1;
+    let focus_cell = grid[y][x];
 
     let edge_cat = check_edge(x, y, grid.len());
 
     let (r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell) =
         find_neighbour(x, y, &grid, edge_cat);
+
+    let life_status = check_life(&focus_cell);
 
     println!("r_cell ~~> {}", r_cell);
 }
@@ -169,7 +172,19 @@ fn check_edge(x: usize, y: usize, len: usize) -> usize {
     }
 }
 
+fn check_life(focus_cell: &char) -> i8 {
+    if focus_cell == &'*' {
+        println!("This cell is alive");
+        return 1;
+    } else if focus_cell == &'-'{
+        println!("This cell is dead");
+        return 0;
+    } else {
+        println!("This cell is void");
+        return -1;
+    }
+}
+
 // *** TODAY ***
 // check_life()
-// apply_rules()
-//
+// check_fate()
