@@ -1,5 +1,5 @@
 fn main() {
-    let grid: Vec<Vec<char>> = gen_grid();
+    let mut grid: Vec<Vec<char>> = gen_grid();
     std_out_grid(&grid);
 
     let x = 1;
@@ -12,6 +12,9 @@ fn main() {
     println!("[0] index of neighbours ~~> {}", neighbours[0]);
 
     let life_status: i8 = 0;
+
+    grid = check_fate(x, y, &neighbours, grid);
+    println!("grid ~~> {}", grid[y][x]);
 }
 
 fn gen_grid() -> Vec<Vec<char>> {
@@ -173,11 +176,33 @@ fn check_edge(x: usize, y: usize, len: usize) -> usize {
 // *** TODAY ***
 // check_life()
 // check_fate()
-    // Takes (&focus_cell, find_neighbour(return: char), check_life())
+    // Takes (x, y, neighbours, check_life())
         // * Rules
         //  + Any live cell with fewer than two live neighbours dies, as if by underpopulation
         //  + Any live cell with two or three live neighbours lives on to the next generation
         //  + Any live cell with more than three live neighbours dies, as if by overpopulation
         //  + Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction
     // iterate through check_life((..)) { return i_sum value }
-    // if i_sum < 2 ~~> SET grid[y][x] = 
+    // if i_sum < 2 ~~> SET grid[y][x] = "-"
+    // else if ...
+    // else | i_sum > 3 |
+
+fn check_fate(x: usize, y: usize, neighbours: &[char; 8], mut grid: Vec<Vec<char>>) -> Vec<Vec<char>> {
+    let mut i_sum = 0;
+    for i in neighbours.iter() {
+        if check_life(i) == 1 {
+            i_sum = i_sum + 1;
+            println!("i_sum ~~> {}", i_sum);
+        }
+    }
+    // if i_sum < 2 {
+    //     grid[y][x] = '0';
+
+    // }
+    grid[y][x] = '9';
+    return grid;
+}
+
+fn check_life(i: &char) -> i8 {
+    return 1;
+}
