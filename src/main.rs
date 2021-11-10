@@ -8,11 +8,10 @@ fn main() {
 
     let edge_cat = check_edge(x, y, grid.len());
 
-    let (r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell) =
-        find_neighbour(x, y, &grid, edge_cat);
-    let life_status: i8 = 0;
+    let neighbours = find_neighbour(x, y, &grid, edge_cat);
+    println!("[0] index of neighbours ~~> {}", neighbours[0]);
 
-    println!("r_cell ~~> {}", r_cell);
+    let life_status: i8 = 0;
 }
 
 fn gen_grid() -> Vec<Vec<char>> {
@@ -47,7 +46,7 @@ fn find_neighbour(
     y: usize,
     grid: &Vec<Vec<char>>,
     edge_cat: usize,
-) -> (char, char, char, char, char, char, char, char) {
+) -> [char; 8] {
     let focus_cell = grid[y][x];
     println!("focus_cell ~~> {}", focus_cell);
 
@@ -64,9 +63,9 @@ fn find_neighbour(
         let ru_cell = grid[y + 1][x + 1];
         let lu_cell = 'v';
 
-        return (
+        return [
             r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
-        );
+        ];
     } else if edge_cat == 1 {
         let r_cell = grid[y][x + 1];
         let l_cell = 'v';
@@ -77,9 +76,9 @@ fn find_neighbour(
         let ru_cell = grid[y - 1][x + 1];
         let lu_cell = 'v';
 
-        return (
+        return [
             r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
-        );
+        ];
     } else if edge_cat == 2 {
         let r_cell = grid[y][x + 1];
         let l_cell = grid[y][x - 1];
@@ -90,9 +89,9 @@ fn find_neighbour(
         let ru_cell = 'v';
         let lu_cell = 'v';
 
-        return (
+        return [
             r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
-        );
+        ];
     } else if edge_cat == 3 {
         let r_cell = 'v';
         let l_cell = grid[y][x - 1];
@@ -103,9 +102,9 @@ fn find_neighbour(
         let ru_cell = 'v';
         let lu_cell = grid[y - 1][x - 1];
 
-        return (
+        return [
             r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
-        );
+        ];
     } else if edge_cat == 4 {
         let r_cell = 'v';
         let l_cell = grid[y][x - 1];
@@ -116,9 +115,9 @@ fn find_neighbour(
         let ru_cell = 'v';
         let lu_cell = grid[y - 1][x - 1];
 
-        return (
+        return [
             r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
-        );
+        ];
     } else if edge_cat == 5 {
         let r_cell = grid[y][x + 1];
         let l_cell = grid[y][x - 1];
@@ -129,9 +128,9 @@ fn find_neighbour(
         let ru_cell = grid[y - 1][x + 1];
         let lu_cell = grid[y - 1][x - 1];
 
-        return (
+        return [
             r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
-        );
+        ];
     } else {
         let r_cell = grid[y][x + 1];
         let l_cell = grid[y][x - 1];
@@ -142,9 +141,9 @@ fn find_neighbour(
         let ld_cell = grid[y + 1][x - 1];
         let lu_cell = grid[y - 1][x - 1];
 
-        return (
+        return [
             r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
-        );
+        ];
     }
 }
 
