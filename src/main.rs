@@ -178,9 +178,9 @@ fn check_edge(x: usize, y: usize, len: usize) -> usize {
 // check_fate()
     // Takes (x, y, neighbours, check_life())
         // * Rules
-        //  + Any live cell with fewer than two live neighbours dies, as if by underpopulation
-        //  + Any live cell with two or three live neighbours lives on to the next generation
-        //  + Any live cell with more than three live neighbours dies, as if by overpopulation
+        //  + Any live cell with fewer than two live neighbours dies, as if by underpopulation | 
+        //  + Any live cell with two or three live neighbours lives on to the next generation |
+        //  + Any live cell with more than three live neighbours dies, as if by overpopulation 
         //  + Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction
     // iterate through check_life((..)) { return i_sum value }
     // if i_sum < 2 ~~> SET grid[y][x] = "-"
@@ -195,11 +195,19 @@ fn check_fate(x: usize, y: usize, neighbours: &[char; 8], mut grid: Vec<Vec<char
             println!("i_sum ~~> {}", i_sum);
         }
     }
-    // if i_sum < 2 {
-    //     grid[y][x] = '0';
+    if i_sum < 2 {
+        grid[y][x] = '0';
 
-    // }
-    grid[y][x] = '9';
+    } else if i_sum >= 2 && i_sum <= 3 {
+        grid[y][x] = '1';
+
+    } else if i_sum > 3 {
+        grid[y][x] = '0';
+
+    } else if i_sum == 3 {
+        grid[y][x] = '1';
+
+    }
     return grid;
 }
 
