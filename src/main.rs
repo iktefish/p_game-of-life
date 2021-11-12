@@ -2,8 +2,8 @@ fn main() {
     let mut grid: Vec<Vec<char>> = gen_grid();
     std_out_grid(&grid);
 
-    let x = 1;
-    let y = 1;
+    let x = 0;
+    let y = 8;
     let focus_cell = grid[y][x];
 
     let edge_cat = check_edge(x, y, grid.len());
@@ -176,13 +176,12 @@ fn check_edge(x: usize, y: usize, len: usize) -> usize {
 
 fn check_life(focus_cell: &char) -> i8 {
     if focus_cell == &'*' {
-        println!("This cell is alive");
         return 1;
+
     } else if focus_cell == &'-'{
-        println!("This cell is dead");
         return 0;
+
     } else {
-        println!("This cell is void");
         return -1;
     }
 }
