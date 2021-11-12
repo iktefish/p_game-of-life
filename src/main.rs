@@ -4,17 +4,18 @@ fn main() {
 
     let x = 1;
     let y = 1;
-    let focus_cell: char = grid[y][x];
+    let focus_cell = grid[y][x];
 
     let edge_cat = check_edge(x, y, grid.len());
 
     let neighbours = find_neighbour(x, y, &grid, edge_cat);
     println!("[0] index of neighbours ~~> {}", neighbours[0]);
 
-    let life_status: i8 = 0;
+    let life_status = check_life(&focus_cell);
 
     grid = check_fate(x, y, &neighbours, grid);
     println!("grid ~~> {}", grid[y][x]);
+    println!("r_cell ~~> {}", neighbours[0]);
 }
 
 fn gen_grid() -> Vec<Vec<char>> {
@@ -173,6 +174,19 @@ fn check_edge(x: usize, y: usize, len: usize) -> usize {
     }
 }
 
+fn check_life(focus_cell: &char) -> i8 {
+    if focus_cell == &'*' {
+        println!("This cell is alive");
+        return 1;
+    } else if focus_cell == &'-'{
+        println!("This cell is dead");
+        return 0;
+    } else {
+        println!("This cell is void");
+        return -1;
+    }
+}
+
 // *** TODAY ***
 // check_life()
 // check_fate()
@@ -209,8 +223,4 @@ fn check_fate(x: usize, y: usize, neighbours: &[char; 8], mut grid: Vec<Vec<char
 
     }
     return grid;
-}
-
-fn check_life(i: &char) -> i8 {
-    return 1;
 }
