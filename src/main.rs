@@ -57,16 +57,16 @@ fn main() {
 }
 
 fn gen_grid() -> Vec<Vec<char>> {
-    let row_0: Vec<char> = vec!['*', '-', '*', '*', '*', '*', '*', '-', '-', '-'];
-    let row_1: Vec<char> = vec!['-', '*', '-', '*', '-', '*', '*', '*', '-', '-'];
-    let row_2: Vec<char> = vec!['*', '-', '*', '*', '-', '*', '-', '*', '-', '-'];
-    let row_3: Vec<char> = vec!['-', '*', '-', '*', '-', '*', '*', '*', '-', '-'];
-    let row_4: Vec<char> = vec!['*', '*', '-', '*', '-', '*', '-', '-', '*', '-'];
-    let row_5: Vec<char> = vec!['*', '*', '-', '-', '*', '*', '*', '-', '*', '-'];
-    let row_6: Vec<char> = vec!['*', '-', '-', '*', '*', '-', '-', '*', '*', '-'];
-    let row_7: Vec<char> = vec!['-', '*', '*', '*', '*', '-', '*', '-', '-', '*'];
-    let row_8: Vec<char> = vec!['-', '*', '*', '-', '*', '-', '*', '-', '-', '*'];
-    let row_9: Vec<char> = vec!['-', '*', '*', '*', '*', '-', '*', '-', '-', '*'];
+    let row_0: Vec<char> = vec!['*', ' ', '*', '*', '*', '*', '*', ' ', ' ', ' '];
+    let row_1: Vec<char> = vec![' ', '*', ' ', '*', ' ', '*', '*', '*', ' ', ' '];
+    let row_2: Vec<char> = vec!['*', ' ', '*', '*', ' ', '*', ' ', '*', ' ', ' '];
+    let row_3: Vec<char> = vec![' ', '*', ' ', '*', ' ', '*', '*', '*', ' ', ' '];
+    let row_4: Vec<char> = vec!['*', '*', ' ', '*', ' ', '*', ' ', ' ', '*', ' '];
+    let row_5: Vec<char> = vec!['*', '*', ' ', ' ', '*', '*', '*', ' ', '*', ' '];
+    let row_6: Vec<char> = vec!['*', ' ', ' ', '*', '*', ' ', ' ', '*', '*', ' '];
+    let row_7: Vec<char> = vec![' ', '*', '*', '*', '*', ' ', '*', ' ', ' ', '*'];
+    let row_8: Vec<char> = vec![' ', '*', '*', ' ', '*', ' ', '*', ' ', ' ', '*'];
+    let row_9: Vec<char> = vec![' ', '*', '*', '*', '*', ' ', '*', ' ', ' ', '*'];
 
     let grid: Vec<Vec<char>> = vec![
         row_0, row_1, row_2, row_3, row_4, row_5, row_6, row_7, row_8, row_9,
@@ -247,7 +247,7 @@ fn check_life(focus_cell: &char) -> i8 {
     if focus_cell == &'*' {
         return 1;
 
-    } else if focus_cell == &'-'{
+    } else if focus_cell == &' '{
         return 0;
 
     } else {
@@ -278,13 +278,13 @@ fn check_fate(x: usize, y: usize, neighbours: &[char; 8], mut grid: Vec<Vec<char
         }
     }
     if i_sum < 2 {
-        grid[y][x] = '-';
+        grid[y][x] = ' ';
 
     } else if i_sum >= 2 && i_sum <= 3 {
         grid[y][x] = '*';
 
     } else if i_sum > 3 {
-        grid[y][x] = '-';
+        grid[y][x] = ' ';
 
     } else if i_sum == 3 {
         grid[y][x] = '*';
