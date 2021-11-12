@@ -1,21 +1,53 @@
+use std::{thread, time};
+
 fn main() {
     let mut grid: Vec<Vec<char>> = gen_grid();
-    std_out_grid(&grid);
+    let mut len = grid.len();
+    
+    // std_out_grid(&grid);
+    let mut x = 0;
+    let mut y = 0;
 
-    let x = 0;
-    let y = 8;
-    let focus_cell = grid[y][x];
+    loop {
+        thread::sleep(time::Duration::from_millis(500));
+        std::process::Command::new("clear").status().unwrap();
+        std_out_grid(&grid);
+        let focus_cell = grid[y][x];
 
-    let edge_cat = check_edge(x, y, grid.len());
+        let edge_cat = check_edge(x, y, grid.len());
 
-    let neighbours = find_neighbour(x, y, &grid, edge_cat);
-    println!("[0] index of neighbours ~~> {}", neighbours[0]);
+        let neighbours = find_neighbour(x, y, &grid, edge_cat);
+        println!("[0] index of neighbours ~~> {}", neighbours[0]);
 
-    let life_status = check_life(&focus_cell);
+        let life_status = check_life(&focus_cell);
 
-    grid = check_fate(x, y, &neighbours, grid);
-    println!("grid ~~> {}", grid[y][x]);
-    println!("r_cell ~~> {}", neighbours[0]);
+        grid = check_fate(x, y, &neighbours, grid);
+
+        if x < len {
+            x = x + 1;
+        } else if x == len {
+            y = y + 1;
+        }
+
+        // for i in grid.iter() {
+        //     for ii in i.iter() {
+        //         if y < len-1 {
+        //             y = y + 1;
+        //             break;
+        //         } else {
+        //             break;
+        //         }
+                
+        //     }
+        //     if y == len-1 {
+
+        //     }
+        // }
+
+    }
+    
+    // println!("grid ~~> {}", grid[y][x]);
+    // println!("r_cell ~~> {}", neighbours[0]);
 }
 
 fn gen_grid() -> Vec<Vec<char>> {
@@ -54,10 +86,10 @@ fn find_neighbour(
     let focus_cell = grid[y][x];
     println!("focus_cell ~~> {}", focus_cell);
 
-    // *** My tuple template ***
+    // *** My tuple template *** PS: Now an array!
     // (r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell)
 
-    if edge_cat == 0 {
+    if edge_cat == 0 {       // Top-left corner
         let r_cell = grid[y][x + 1];
         let l_cell = 'v';
         let d_cell = grid[y + 1][x];
@@ -70,7 +102,7 @@ fn find_neighbour(
         return [
             r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
         ];
-    } else if edge_cat == 1 {
+    } else if edge_cat == 1 {      // Left-Edge
         let r_cell = grid[y][x + 1];
         let l_cell = 'v';
         let d_cell = grid[y + 1][x];
@@ -83,7 +115,7 @@ fn find_neighbour(
         return [
             r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
         ];
-    } else if edge_cat == 2 {
+    } else if edge_cat == 2 {      // Top-Edge
         let r_cell = grid[y][x + 1];
         let l_cell = grid[y][x - 1];
         let d_cell = grid[y + 1][x];
@@ -96,7 +128,7 @@ fn find_neighbour(
         return [
             r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
         ];
-    } else if edge_cat == 3 {
+    } else if edge_cat == 3 {        // Bot-Right corner
         let r_cell = 'v';
         let l_cell = grid[y][x - 1];
         let d_cell = 'v';
@@ -109,7 +141,7 @@ fn find_neighbour(
         return [
             r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
         ];
-    } else if edge_cat == 4 {
+    } else if edge_cat == 4 {        // Right-Edge
         let r_cell = 'v';
         let l_cell = grid[y][x - 1];
         let d_cell = grid[y + 1][x];
@@ -122,7 +154,7 @@ fn find_neighbour(
         return [
             r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
         ];
-    } else if edge_cat == 5 {
+    } else if edge_cat == 5 {        // Bottom-Edge
         let r_cell = grid[y][x + 1];
         let l_cell = grid[y][x - 1];
         let d_cell = 'v';
@@ -135,7 +167,8 @@ fn find_neighbour(
         return [
             r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
         ];
-    } else {
+    } else {        // Middle Values
+        println!("HALLLP IMMA PANICK");
         let r_cell = grid[y][x + 1];
         let l_cell = grid[y][x - 1];
         let d_cell = grid[y + 1][x];
@@ -152,23 +185,23 @@ fn find_neighbour(
 }
 
 fn check_edge(x: usize, y: usize, len: usize) -> usize {
-    if x == 0 && y == 0 {
+    if x == 0 && y == 0 {       // Top-left corner
         println!("return = 0");
         return 0;
-    } else if x == 0 && y > 0 && y < len - 1 {
+    } else if x == 0 && y > 0 && y < len - 1 {      // Left-Edge
         println!("y is > 0");
         return 1;
-    } else if x > 0 && x < len - 1 && y == 0 {
+    } else if x > 0 && x < len - 1 && y == 0 {      // Top-Edge
         return 2;
-    } else if x == len - 1 && y == len - 1 {
+    } else if x == len - 1 && y == len - 1 {        // Bot-Right corner
         return 3;
-    } else if x == len - 1 && y < len - 1 && y > 0 {
+    } else if x == len - 1 && y < len - 1 && y > 0 {        // Right-Edge
         return 4;
-    } else if x < len - 1 && x > 0 && y == len - 1 {
+    } else if x < len - 1 && x > 0 && y == len - 1 {        // Bottom-Edge
         return 5;
-    } else {
+    }else if  else {        // Middle Values
         // Condition in this step =>
-        // x < len-1 && x > 0 && y < len-1 && y > 0 {
+        // x < len-1 && x > 0 && y < len-1 && y > 0 
         println!("mid val");
         return 6;
     }
