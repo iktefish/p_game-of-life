@@ -9,9 +9,11 @@ fn main() {
     let mut y = 0;
 
     loop {
-        thread::sleep(time::Duration::from_millis(500));
+        thread::sleep(time::Duration::from_millis(20));
         std::process::Command::new("clear").status().unwrap();
         std_out_grid(&grid);
+        println!("x ~~> {}", x);
+        println!("y ~~> {}", y);
         let focus_cell = grid[y][x];
 
         let edge_cat = check_edge(x, y, grid.len());
@@ -23,10 +25,14 @@ fn main() {
 
         grid = check_fate(x, y, &neighbours, grid);
 
-        if x < len {
+        if x < len -1 {
             x = x + 1;
-        } else if x == len {
+        } else if x == len -1 && y < len-1 {
             y = y + 1;
+            x = len - len;
+        } else if x == len -1 && y == len -1 {
+            x = 0;
+            y = 0;
         }
 
         // for i in grid.iter() {
@@ -272,16 +278,16 @@ fn check_fate(x: usize, y: usize, neighbours: &[char; 8], mut grid: Vec<Vec<char
         }
     }
     if i_sum < 2 {
-        grid[y][x] = '0';
+        grid[y][x] = '-';
 
     } else if i_sum >= 2 && i_sum <= 3 {
-        grid[y][x] = '1';
+        grid[y][x] = '*';
 
     } else if i_sum > 3 {
-        grid[y][x] = '0';
+        grid[y][x] = '-';
 
     } else if i_sum == 3 {
-        grid[y][x] = '1';
+        grid[y][x] = '*';
 
     }
     return grid;

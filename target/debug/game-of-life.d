@@ -1,1 +1,1 @@
-/home/runner/pgame-of-life/target/debug/game-of-life: /home/runner/pgame-of-life/src/main.rs
+/home/debian-vm/Documents/Projects/p_game-of-life/target/debug/game-of-life: /home/debian-vm/Documents/Projects/p_game-of-life/src/main.rs
