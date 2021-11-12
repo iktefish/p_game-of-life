@@ -102,33 +102,20 @@ fn find_neighbour(
         return [
             r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
         ];
-    } else if edge_cat == 1 {      // Left-Edge
-        let r_cell = grid[y][x + 1];
-        let l_cell = 'v';
-        let d_cell = grid[y + 1][x];
-        let u_cell = grid[y - 1][x];
-        let rd_cell = grid[y + 1][x + 1];
-        let ld_cell = 'v';
-        let ru_cell = grid[y - 1][x + 1];
-        let lu_cell = 'v';
-
-        return [
-            r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
-        ];
-    } else if edge_cat == 2 {      // Top-Edge
-        let r_cell = grid[y][x + 1];
+    } else if edge_cat == 1 {        // Top-Right corner
+        let r_cell = 'v';
         let l_cell = grid[y][x - 1];
-        let d_cell = grid[y + 1][x];
+        let d_cell = grid[y+1][x];
         let u_cell = 'v';
-        let rd_cell = grid[y + 1][x + 1];
-        let ld_cell = grid[y + 1][x - 1];
+        let rd_cell = 'v';
+        let ld_cell = grid[y+1][x-1];
         let ru_cell = 'v';
         let lu_cell = 'v';
 
         return [
             r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
         ];
-    } else if edge_cat == 3 {        // Bot-Right corner
+    } else if edge_cat == 2 {        // Bot-Right corner
         let r_cell = 'v';
         let l_cell = grid[y][x - 1];
         let d_cell = 'v';
@@ -141,7 +128,46 @@ fn find_neighbour(
         return [
             r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
         ];
-    } else if edge_cat == 4 {        // Right-Edge
+    } else if edge_cat == 3 {        // Bot-Left corner
+        let r_cell = grid[y][x + 1];
+        let l_cell = 'v';
+        let d_cell = 'v';
+        let u_cell = grid[y - 1][x];
+        let rd_cell = 'v';
+        let ld_cell = 'v';
+        let ru_cell = grid[y-1][x + 1];
+        let lu_cell = 'v';
+
+        return [
+            r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
+        ];
+    } else if edge_cat == 4 {      // Left-Edge
+        let r_cell = grid[y][x + 1];
+        let l_cell = 'v';
+        let d_cell = grid[y + 1][x];
+        let u_cell = grid[y - 1][x];
+        let rd_cell = grid[y + 1][x + 1];
+        let ld_cell = 'v';
+        let ru_cell = grid[y - 1][x + 1];
+        let lu_cell = 'v';
+
+        return [
+            r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
+        ];
+    } else if edge_cat == 5 {      // Top-Edge
+        let r_cell = grid[y][x + 1];
+        let l_cell = grid[y][x - 1];
+        let d_cell = grid[y + 1][x];
+        let u_cell = 'v';
+        let rd_cell = grid[y + 1][x + 1];
+        let ld_cell = grid[y + 1][x - 1];
+        let ru_cell = 'v';
+        let lu_cell = 'v';
+
+        return [
+            r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
+        ];
+    } else if edge_cat == 6 {        // Right-Edge
         let r_cell = 'v';
         let l_cell = grid[y][x - 1];
         let d_cell = grid[y + 1][x];
@@ -154,7 +180,7 @@ fn find_neighbour(
         return [
             r_cell, l_cell, d_cell, u_cell, rd_cell, ld_cell, ru_cell, lu_cell,
         ];
-    } else if edge_cat == 5 {        // Bottom-Edge
+    } else if edge_cat == 7 {        // Bottom-Edge
         let r_cell = grid[y][x + 1];
         let l_cell = grid[y][x - 1];
         let d_cell = 'v';
@@ -188,22 +214,26 @@ fn check_edge(x: usize, y: usize, len: usize) -> usize {
     if x == 0 && y == 0 {       // Top-left corner
         println!("return = 0");
         return 0;
+    } else if x == len -1 && y == 0 {
+        return 1;       // Top-Right corner | done
+    } else if x == len - 1 && y == len - 1 {        // Bot-Right corner
+        return 2;
+    } else if x == 0  && y == len -1 {      // Bot-Left corner
+        return 3; // | 3
     } else if x == 0 && y > 0 && y < len - 1 {      // Left-Edge
         println!("y is > 0");
-        return 1;
-    } else if x > 0 && x < len - 1 && y == 0 {      // Top-Edge
-        return 2;
-    } else if x == len - 1 && y == len - 1 {        // Bot-Right corner
-        return 3;
-    } else if x == len - 1 && y < len - 1 && y > 0 {        // Right-Edge
         return 4;
-    } else if x < len - 1 && x > 0 && y == len - 1 {        // Bottom-Edge
+    } else if x > 0 && x < len - 1 && y == 0 {      // Top-Edge
         return 5;
-    }else if  else {        // Middle Values
+    } else if x == len - 1 && y < len - 1 && y > 0 {        // Right-Edge
+        return 6;
+    } else if x < len - 1 && x > 0 && y == len - 1 {        // Bottom-Edge
+        return 7;
+    } else {        // Middle Values
         // Condition in this step =>
         // x < len-1 && x > 0 && y < len-1 && y > 0 
         println!("mid val");
-        return 6;
+        return 8;
     }
 }
 
